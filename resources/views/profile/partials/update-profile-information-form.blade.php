@@ -5,7 +5,7 @@
         </h2>
 
         <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
-            {{ __("Update your account's profile information and email address.") }}
+            {{ __("Need to update your email address? You can do this here!") }}
         </p>
     </header>
 
@@ -18,9 +18,10 @@
         @method('patch')
 
         <div>
-            <x-input-label for="name" :value="__('Name')" />
-            <x-text-input id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->name)" required autofocus autocomplete="name" />
+            <x-input-label for="name" :value="__('Your Name')" />
+            <x-text-input style="cursor: not-allowed" id="name" name="name" type="text" class="mt-1 block w-full" :value="old('name', $user->firstname . ' ' . $user->lastname)" readonly />
             <x-input-error class="mt-2" :messages="$errors->get('name')" />
+            <div class="mt-2" style="color:grey;">Wanting to change your name? Please click <a href="mailto:data@horizontutoring.com.au?subject=Requesting change of my name&body=Hello, %0D%0AMy name is {{Auth::user()->firstname}} {{Auth::user()->lastname}} and I am requesting to change my name.%0D%0A%0D%0A[! Requested Name and Evidence]. %0D%0A %0D%0ARegards,">here</a> to request this via email.</div>
         </div>
 
         <div>
